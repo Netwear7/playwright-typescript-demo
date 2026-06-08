@@ -6,7 +6,12 @@ import { ClickPage } from '../../pages/click.page';
 test('basic click test', async ({ page, browserName }) => {
     const clickPage = new ClickPage(page);
     await clickPage.goto();
-    await clickPage.expectButtonState('Button That Ignores DOM Click Event', "btn-primary");
+    await clickPage.expectTitle('Click');
+    await test.step('Verify button state before click', async () => {
+        await clickPage.expectButtonState('Button That Ignores DOM Click Event', "btn-primary");
+    });
     await clickPage.clickButton(browserName);
-    await clickPage.expectButtonState('Button That Ignores DOM Click Event', "btn-success"); // Vérifie que le texte et la couleur du bouton ont changé
+    await test.step('Verify button state after click', async () => {
+        await clickPage.expectButtonState('Button That Ignores DOM Click Event', "btn-success");
+    }); 
 });
