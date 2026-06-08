@@ -10,10 +10,12 @@ import { Page, Locator, expect } from '@playwright/test';
 export class ClickPage {
     private readonly page: Page;
     private readonly button: Locator;
+    private readonly title: Locator;
 
     constructor(page: Page) {
         this.page = page;
         this.button = page.locator("#badButton");
+        this.title = page.getByRole('heading', { name: 'Click' });
     }
 
     /**
@@ -70,5 +72,9 @@ export class ClickPage {
     async expectButtonState(expectedText: string, expectedClass: string): Promise<void> {
         await expect(this.button).toContainText(expectedText);
         await expect(this.button).toHaveClass(new RegExp(expectedClass));
+    }
+
+    async expectTitle(expectedTitle: string): Promise<void> {
+        await expect(this.title).toHaveText(expectedTitle);
     }
 }
