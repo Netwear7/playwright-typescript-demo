@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    name: Playwright Execution
+    name: Playright Execution
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
